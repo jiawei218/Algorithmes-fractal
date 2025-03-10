@@ -1,0 +1,15 @@
+#! /bin/make
+# :vim: set noexpandtab:
+#main: main.c 
+  #gcc -c qdbmp.c
+  #gcc -o executable main.c -lm `sdl2-config --cflags --libs`
+main: qdbmp.o fractales.o traitements_simples.o main.o
+	gcc -o main qdbmp.o fractales.o traitements_simples.o main.o -lm `sdl2-config --cflags --libs`
+qdbmp.o: qdbmp.c
+	gcc -o qdbmp.o -c qdbmp.c
+fractales.o: fractales.c
+	gcc -o fractales.o -c fractales.c -lm `sdl2-config --cflags --libs`
+traitements_simples.o: traitements_simples.c
+	gcc -o traitements_simples.o -c traitements_simples.c -lm `sdl2-config --cflags --libs`
+main.o: main.c qdbmp.h fractales.h traitements_simples.h
+	gcc -o main.o -c main.c -lm `sdl2-config --cflags --libs`
